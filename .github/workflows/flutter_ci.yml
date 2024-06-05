@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-latest  # macOS環境でジョブを実行
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
@@ -32,9 +32,6 @@ jobs:
 
       - name: Build Android
         run: flutter build apk --release
-
-      - name: Build iOS
-        run: flutter build ios --no-codesign
 
       # デプロイステップを追加する場合は、以下のように記述します。
       # 例えば、Firebase App Distributionを使用する場合:
