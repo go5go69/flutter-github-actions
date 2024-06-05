@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build:
+  build-android:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,6 +32,30 @@ jobs:
 
       - name: Build Android
         run: flutter build apk --release
+
+  build-ios:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.1'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Analyze code
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Build iOS
+        run: flutter build ios --no-codesign
 
       # デプロイステップを追加する場合は、以下のように記述します。
       # 例えば、Firebase App Distributionを使用する場合:
